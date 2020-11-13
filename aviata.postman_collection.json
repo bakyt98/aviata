@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "206feeee-7cfd-4004-988a-717591f69cdb",
+		"name": "aviata",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get flights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8000/api/tickets/?fly_from=ALA&fly_to=TSE&date_from=2020-11-13&date_to=2020-11-20&passenger_amount=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tickets",
+						""
+					],
+					"query": [
+						{
+							"key": "fly_from",
+							"value": "ALA"
+						},
+						{
+							"key": "fly_to",
+							"value": "TSE"
+						},
+						{
+							"key": "date_from",
+							"value": "2020-11-13"
+						},
+						{
+							"key": "date_to",
+							"value": "2020-11-20"
+						},
+						{
+							"key": "passenger_amount",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get cheapest flight",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8000/api/tickets/get_cheapest_flight/?fly_from=ALA&fly_to=TSE&date_from=2020-11-13&date_to=2020-12-15&passenger_amount=1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tickets",
+						"get_cheapest_flight",
+						""
+					],
+					"query": [
+						{
+							"key": "fly_from",
+							"value": "ALA"
+						},
+						{
+							"key": "fly_to",
+							"value": "TSE"
+						},
+						{
+							"key": "date_from",
+							"value": "2020-11-13"
+						},
+						{
+							"key": "date_to",
+							"value": "2020-12-15"
+						},
+						{
+							"key": "passenger_amount",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
