@@ -9,7 +9,6 @@ from .models import Direction, DirectionPrice
 @shared_task
 def update_prices():
     try:
-        print("QQQQQQQQQQ")
         date_today = date.today()
         date_after_month = date_today + relativedelta(months=1)
         date_from = date_today.strftime("%d/%m/%Y")
