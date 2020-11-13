@@ -1,5 +1,5 @@
 # Aviata task
-## Using external api get prices of flights and get cheapest flight
+Using external api get prices of flights and get cheapest flight
 
 ### API
 #### get_flights: gets all flights related to params in ordered by price and date
