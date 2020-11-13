@@ -6,6 +6,7 @@ from django.conf import settings
 
 from .models import Direction, DirectionPrice
 
+
 @shared_task
 def update_prices():
     try:
@@ -28,12 +29,14 @@ def update_prices():
                     flights_invalid = content['flights_invalid']
                     if flights_checked and content['price_change']:
                         new_price = content['tickets_price']
-                if (flight['availability']['seats'] or 0) > 0 and not flights_invalid:
+                if (flight['availability']['seats'] or 0) > 0 and \
+                        not flights_invalid:
                     direction_price, _ = DirectionPrice.objects.get_or_create(
                         direction_id=direction.id,
                         date=datetime.fromtimestamp(flight['dTime']))
                     direction_price.price = new_price
-                    direction_price.available_place_amount = flight['availability']['seats']
+                    direction_price.available_place_amount = \
+                        flight['availability']['seats']
                     direction_price.save()
     except Exception as e:
         print(str(e))
