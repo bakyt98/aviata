@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -131,9 +132,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+GET_FLIGHTS_URL = os.getenv("GET_FLIGHTS_URL")
+FLIGHTS_CHECK_URL = os.getenv("FLIGHTS_CHECK_URL")
+
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 20,
-    'EXCEPTION_HANDLER': 'iqanat.utils.exceptions.custom_exception_handler',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100,
 }
 
 CELERY_BROKER_URL = 'pyamqp://{user}:{pwd}@{host}:{port}/{vhost}'.format(
@@ -145,14 +149,10 @@ CELERY_BROKER_URL = 'pyamqp://{user}:{pwd}@{host}:{port}/{vhost}'.format(
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULE = {
-    # "create_news_or_push_for_student": {
-    #     "task": "iqanat.core.tasks.create_news_or_push_for_student",
-    #     "schedule": crontab(),
-    # },
-    # "end_contest": {
-    #     "task": "iqanat.contest.tasks.end_contest",
-    #     "schedule": crontab(),
-    # },
+    "update_prices": {
+        "task": "core.tasks.update_prices",
+        "schedule": crontab(minute=0, hour=0),
+    },
 }
 
 # Sensible settings for celery
@@ -164,6 +164,6 @@ CELERY_DISABLE_RATE_LIMITS = False
 # By default we will ignore result
 # If you want to see results and try out tasks interactively, change it to False
 # Or change this setting on tasks level
-CELERY_IGNORE_RESULT = True
+CELERY_IGNORE_RESULT = False
 CELERY_SEND_TASK_ERROR_EMAILS = False
 CELERY_TASK_RESULT_EXPIRES = 600
