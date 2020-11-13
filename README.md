@@ -3,9 +3,9 @@
 
 ### API
 #### get_flights: gets all flights related to params in ordered by price and date
-Params: fly_from, fly_to, dat_from, date_to, passenger_amount
+Params: fly_from, fly_to, dat_from, date_to, passenger_amount\
 Output: list of flights with pagination
 
 #### get_cheapest_flight: gets cheapest and closest by date flight related to params
-Params: fly_from, fly_to, dat_from, date_to, passenger_amount
+Params: fly_from, fly_to, dat_from, date_to, passenger_amount\
 Output: cheapest flight
